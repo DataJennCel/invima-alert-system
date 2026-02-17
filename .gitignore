@@ -1,0 +1,11 @@
+# Archivos sensibles
+src/.env
+src/google-credentials.json
+
+# Carpetas
+venv/
+__pycache__/
+output/*.pdf
+
+# Archivos del sistema
+.DS_Store
