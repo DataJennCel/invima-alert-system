@@ -48,6 +48,7 @@ def generar_pdf_desde_respuesta(respuesta):
     fecha_archivo = datetime.now().strftime("%Y%m%d_%H%M%S")
     nombre_archivo = f"evidencia_{nombre_consultorio.replace(' ', '_')}_{fecha_archivo}.pdf"
     ruta_completa = f"output/{nombre_archivo}"
+    os.makedirs("output", exist_ok=True)
     
     # Crear el PDF
     c = canvas.Canvas(ruta_completa, pagesize=letter)
