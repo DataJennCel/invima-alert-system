@@ -34,8 +34,8 @@ jobs:
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: |
-        echo "$GOOGLE_CREDENTIALS" > src/google-credentials.json
-        python src/main.py
+        echo "$GOOGLE_CREDENTIALS" > google-credentials.json
+        python main.py
 
   procesar-pdfs:
     runs-on: ubuntu-latest
@@ -58,5 +58,5 @@ jobs:
         SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: |
-        echo "$GOOGLE_CREDENTIALS" > src/google-credentials.json
-        python src/enviar_pdf_respuestas.py
+        echo "$GOOGLE_CREDENTIALS" > google-credentials.json
+        python enviar_pdf_respuestas.py
