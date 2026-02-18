@@ -8,7 +8,7 @@ load_dotenv('src/.env')
 def enviar_alerta(email_destino, alertas, nombre_consultorio, link_form):
     # alertas es ahora una lista de diccionarios: [{'titulo': '...', 'link': '...'}]
     api_key = os.getenv('SENDGRID_API_KEY')
-    email_remitente = 'jenniffercelisn@gmail.com'
+    email_remitente = 'alertas@alertasanitaria.co'
 
     # Construir lista HTML con título + link de cada alerta
     lista_alertas_html = ""
