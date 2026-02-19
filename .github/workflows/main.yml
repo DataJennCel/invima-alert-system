@@ -2,8 +2,8 @@ name: Sistema INVIMA Automatizado
 
 on:
   schedule:
-    # Jueves 2:30 PM Colombia - Enviar alertas (PRUEBA)
-    - cron: '30 19 * * 4'
+    # Jueves 3:00 PM Colombia - Enviar alertas (PRUEBA)
+    - cron: '0 20 * * 4'
     # Jueves 5:00 PM Colombia - Procesar PDFs (PRUEBA)
     - cron: '0 22 * * 4'
   workflow_dispatch:  # Permite ejecutar manualmente
