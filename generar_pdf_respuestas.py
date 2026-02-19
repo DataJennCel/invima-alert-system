@@ -22,11 +22,11 @@ def generar_pdf_desde_respuesta(respuesta):
         # Buscar columnas que empiecen con "Por favor indica"
         if columna.startswith('Por favor indica'):
             # Extraer el título de la alerta entre [[...]]
-            inicio = columna.find('[[')
+            inicio = columna.find('[')
             fin = columna.rfind(']')
             
             if inicio != -1 and fin != -1:
-                titulo_alerta = columna[inicio+2:fin]  # Extraer [001] Medicamento...
+                titulo_alerta = columna[inicio+1:fin]  # Extraer [001] Medicamento...
                 
                 print(f"  Alerta: {titulo_alerta[:50]}...")
                 print(f"  Respuesta: '{valor}'")
@@ -34,7 +34,7 @@ def generar_pdf_desde_respuesta(respuesta):
                 if valor == 'Aplica':
                     alertas_aplican.append(titulo_alerta)
                     print(f"    ✅ Agregada a APLICAN")
-                elif valor == 'No aplica':
+                elif valor == 'No Aplica':
                     alertas_no_aplican.append(titulo_alerta)
                     print(f"    ❌ Agregada a NO APLICAN")
                 else:
