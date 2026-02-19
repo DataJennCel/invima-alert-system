@@ -20,7 +20,7 @@ def enviar_pdf_por_email(email_destino, nombre_consultorio, ruta_pdf):
     Envía el PDF de evidencia por email al consultorio
     """
     api_key = os.getenv('SENDGRID_API_KEY')
-    email_remitente = 'jenniffercelisn@gmail.com'
+    email_remitente = 'alertas@alertasanitaria.co'
     
     # Leer el archivo PDF
     with open(ruta_pdf, 'rb') as f:
