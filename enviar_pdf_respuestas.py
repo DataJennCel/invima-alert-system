@@ -107,7 +107,6 @@ def procesar_respuestas_pendientes():
     
     # Leer todas las respuestas
     respuestas = leer_respuestas_form()
-    
     if not respuestas:
         print("ℹ️  No hay respuestas en el Form todavía.")
         return
