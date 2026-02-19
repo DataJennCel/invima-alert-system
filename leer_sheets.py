@@ -90,7 +90,7 @@ def leer_respuestas_form():
     client = conectar_google_sheets()
     
     # Abrir el Sheet de respuestas
-    sheet_id = '1GxIK0GZTeNHI4XmJme48qyidXUNKhvVqJJQFzyJNFmk'
+    sheet_id = '1AgrGcFQIEE_kPZCsTIsj7MBRlzYybmD6-wcuk_VbI-k'
     sheet = client.open_by_key(sheet_id).sheet1
     
     # Obtener todas las respuestas
