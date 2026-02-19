@@ -2,13 +2,9 @@ name: Sistema INVIMA Automatizado
 
 on:
   schedule:
-    # Martes 10:00 AM - Enviar alertas
-    - cron: '0 15 * * 2'  # 15:00 UTC = 10:00 AM Colombia
-    # Martes 5:00 PM - Procesar PDFs
-    - cron: '0 22 * * 2'  # 22:00 UTC = 5:00 PM Colombia
-    # Miércoles 5:00 PM - Procesar PDFs
-    - cron: '0 22 * * 3'
-    # Jueves 5:00 PM - Procesar PDFs
+    # Jueves 2:30 PM Colombia - Enviar alertas (PRUEBA)
+    - cron: '30 19 * * 4'
+    # Jueves 5:00 PM Colombia - Procesar PDFs (PRUEBA)
     - cron: '0 22 * * 4'
   workflow_dispatch:  # Permite ejecutar manualmente
 
