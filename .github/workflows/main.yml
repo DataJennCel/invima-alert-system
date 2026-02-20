@@ -2,16 +2,20 @@ name: Sistema INVIMA Automatizado
 
 on:
   schedule:
-    # Jueves 4:00 PM Colombia - Enviar alertas (PRUEBA)
-    - cron: '0 21 * * 4'
-    # Jueves 5:00 PM Colombia - Procesar PDFs (PRUEBA)
+    # Martes 10:00 AM Colombia - Enviar alertas
+    - cron: '0 15 * * 2'
+    # Martes 5:00 PM Colombia - Procesar PDFs
+    - cron: '0 22 * * 2'
+    # Miércoles 5:00 PM Colombia - Procesar PDFs
+    - cron: '0 22 * * 3'
+    # Jueves 5:00 PM Colombia - Procesar PDFs
     - cron: '0 22 * * 4'
   workflow_dispatch:  # Permite ejecutar manualmente
 
 jobs:
   enviar-alertas:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 21 * * 4' || github.event_name == 'workflow_dispatch'
+    if: github.event.schedule == '0 15 * * 2' || github.event_name == 'workflow_dispatch'
     
     steps:
     - uses: actions/checkout@v3
