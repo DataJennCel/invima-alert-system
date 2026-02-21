@@ -15,6 +15,23 @@ import base64
 
 load_dotenv('src/.env')
 
+
+def obtener_columna_pdf_enviado(sheet):
+    """
+    Busca la columna PDF_Enviado. Si no existe, la crea automáticamente.
+    Retorna el número de columna (base 1).
+    """
+    headers = sheet.row_values(1)
+    if 'PDF_Enviado' in headers:
+        columna = headers.index('PDF_Enviado') + 1
+        print(f"✅ Columna PDF_Enviado encontrada en columna {columna}")
+    else:
+        columna = len(headers) + 1
+        sheet.update_cell(1, columna, 'PDF_Enviado')
+        print(f"✅ Columna PDF_Enviado creada en columna {columna}")
+    return columna
+
+
 def enviar_pdf_por_email(email_destino, nombre_consultorio, ruta_pdf):
     """
     Envía el PDF de evidencia por email al consultorio
@@ -22,14 +39,11 @@ def enviar_pdf_por_email(email_destino, nombre_consultorio, ruta_pdf):
     api_key = os.getenv('SENDGRID_API_KEY')
     email_remitente = 'alertas@alertasanitaria.co'
     
-    # Leer el archivo PDF
     with open(ruta_pdf, 'rb') as f:
         pdf_data = f.read()
     
-    # Codificar en base64
     pdf_encoded = base64.b64encode(pdf_data).decode()
     
-    # Crear el attachment
     attachment = Attachment(
         FileContent(pdf_encoded),
         FileName(os.path.basename(ruta_pdf)),
@@ -81,18 +95,10 @@ def enviar_pdf_por_email(email_destino, nombre_consultorio, ruta_pdf):
         return False
 
 
-def marcar_respuesta_procesada(fila_numero):
+def marcar_respuesta_procesada(sheet, fila_numero, columna_pdf_enviado):
     """
     Marca una respuesta como procesada en el Google Sheet
     """
-    client = conectar_google_sheets()
-    sheet_id = '1GxIK0GZTeNHI4XmJme48qyidXUNKhvVqJJQFzyJNFmk'
-    sheet = client.open_by_key(sheet_id).sheet1
-    
-    # La columna PDF_Enviado debería ser la última (columna 10)
-    # Ajusta este número si agregaste la columna en otra posición
-    columna_pdf_enviado = 10
-    
     sheet.update_cell(fila_numero, columna_pdf_enviado, 'SI')
     print(f"✅ Respuesta {fila_numero} marcada como procesada")
 
@@ -104,7 +110,13 @@ def procesar_respuestas_pendientes():
     print("=" * 50)
     print("🚀 PROCESANDO RESPUESTAS DEL FORM")
     print("=" * 50)
-    
+
+    # Conectar al Sheet y preparar columna PDF_Enviado
+    client = conectar_google_sheets()
+    sheet_id = '1GxIK0GZTeNHI4XmJme48qyidXUNKhvVqJJQFzyJNFmk'
+    sheet = client.open_by_key(sheet_id).sheet1
+    columna_pdf_enviado = obtener_columna_pdf_enviado(sheet)
+
     # Leer todas las respuestas
     respuestas = leer_respuestas_form()
     if not respuestas:
@@ -113,7 +125,7 @@ def procesar_respuestas_pendientes():
     
     # Filtrar solo las que no tienen PDF enviado
     respuestas_pendientes = []
-    for i, respuesta in enumerate(respuestas, start=2):  # start=2 porque fila 1 es header
+    for i, respuesta in enumerate(respuestas, start=2):
         pdf_enviado = respuesta.get('PDF_Enviado', '')
         if pdf_enviado != 'SI':
             respuestas_pendientes.append((i, respuesta))
@@ -124,7 +136,6 @@ def procesar_respuestas_pendientes():
     
     print(f"\n📋 Respuestas pendientes: {len(respuestas_pendientes)}\n")
     
-    # Procesar cada respuesta pendiente
     pdfs_enviados = 0
     pdfs_fallidos = 0
     
@@ -136,25 +147,21 @@ def procesar_respuestas_pendientes():
         print(f"Procesando: {nombre}")
         print(f"{'='*50}")
         
-        # Generar PDF
         print("1. Generando PDF...")
         ruta_pdf = generar_pdf_desde_respuesta(respuesta)
         
-        # Enviar por email
         print("2. Enviando por email...")
         exito = enviar_pdf_por_email(email, nombre, ruta_pdf)
         
         if exito:
-            # Marcar como procesada
             print("3. Marcando como procesada...")
-            marcar_respuesta_procesada(fila_numero)
+            marcar_respuesta_procesada(sheet, fila_numero, columna_pdf_enviado)
             pdfs_enviados += 1
         else:
             pdfs_fallidos += 1
         
         print()
     
-    # Resumen final
     print("=" * 50)
     print("📊 RESUMEN")
     print("=" * 50)
@@ -166,4 +173,3 @@ def procesar_respuestas_pendientes():
 
 if __name__ == "__main__":
     procesar_respuestas_pendientes()
-    
