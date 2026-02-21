@@ -2,10 +2,10 @@
 def generar_link_personalizado(nombre_consultorio): #Genera un link personalizado del Google Form con el nombre pre-llenado. Parámetros: nombre_consultorio: Nombre del consultorio (ej: "Consultorio Dr Juan Perez"). Retorna: URL completa del formulario con el nombre pre-cargado
     
     # Tu link base del Form
-    link_base = "https://docs.google.com/forms/d/e/1FAIpQLSeZ4_Bb9hcn8NRSwKL5WgAdEkXjMnRMvIviGITi7Z4aPeBwOg/viewform?usp=dialog"
+    link_base = "https://docs.google.com/forms/d/e/1FAIpQLSca-W-c_RVx8BPKz9UNnVvqTSnBaQOikcen4iW5NvaHuSuyhA/viewform?usp=header"
     
     # ID del campo "Nombre Completo del Consultorio"
-    entry_id = "1917722040"
+    entry_id = "1797398183"
     
     # Reemplazar espacios por +
     nombre_encoded = nombre_consultorio.replace(" ", "+")
