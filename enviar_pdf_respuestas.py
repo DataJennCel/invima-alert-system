@@ -113,7 +113,7 @@ def procesar_respuestas_pendientes():
 
     # Conectar al Sheet y preparar columna PDF_Enviado
     client = conectar_google_sheets()
-    sheet_id = '1GxIK0GZTeNHI4XmJme48qyidXUNKhvVqJJQFzyJNFmk'
+    sheet_id = '1I3MfxxWrT-K48_3ku0ePKAkSPmZV96OY-IyoFHzGZyA'
     sheet = client.open_by_key(sheet_id).sheet1
     columna_pdf_enviado = obtener_columna_pdf_enviado(sheet)
 
