@@ -102,6 +102,13 @@ def marcar_respuesta_procesada(sheet, fila_numero, columna_pdf_enviado):
     sheet.update_cell(fila_numero, columna_pdf_enviado, 'SI')
     print(f"✅ Respuesta {fila_numero} marcada como procesada")
 
+def hubo_alertas_hoy():
+    client = conectar_google_sheets()
+    sheet_id = '116tVNtLb9uzb_811YJ8I54Cvf-ovA0NfnqwXPhQfHHE'
+    sheet = client.open_by_key(sheet_id).sheet1
+    datos = sheet.get_all_records()
+    enviadas = [f for f in datos if f.get('Estado', '').strip().lower() == 'enviada']
+    return len(enviadas) > 0
 
 def procesar_respuestas_pendientes():
     """
@@ -110,6 +117,10 @@ def procesar_respuestas_pendientes():
     print("=" * 50)
     print("🚀 PROCESANDO RESPUESTAS DEL FORM")
     print("=" * 50)
+
+    if not hubo_alertas_hoy():
+        print("ℹ️  No hubo alertas esta semana. No se procesan PDFs.")
+        return
 
     # Conectar al Sheet y preparar columna PDF_Enviado
     client = conectar_google_sheets()
