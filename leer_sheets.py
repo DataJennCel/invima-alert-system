@@ -93,6 +93,12 @@ def leer_respuestas_form():
     sheet_id = '1I3MfxxWrT-K48_3ku0ePKAkSPmZV96OY-IyoFHzGZyA'
     sheet = client.open_by_key(sheet_id).sheet1
     
+    # Verificar si hay datos más allá del header
+    todos_los_valores = sheet.get_all_values()
+    if len(todos_los_valores) <= 1:
+        print("ℹ️  No hay respuestas en el Form todavía.")
+        return []
+
     # Obtener todas las respuestas
     respuestas = sheet.get_all_records()
     
