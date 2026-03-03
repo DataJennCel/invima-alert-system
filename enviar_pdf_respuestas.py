@@ -124,7 +124,7 @@ def procesar_respuestas_pendientes():
 
     # Conectar al Sheet y preparar columna PDF_Enviado
     client = conectar_google_sheets()
-    sheet_id = '1I3MfxxWrT-K48_3ku0ePKAkSPmZV96OY-IyoFHzGZyA'
+    sheet_id = '1wHJp-RClH1WHRKa6jN2y4et7ZQRmNVLRdbc7W0MTts4'
     sheet = client.open_by_key(sheet_id).sheet1
     columna_pdf_enviado = obtener_columna_pdf_enviado(sheet)
 
