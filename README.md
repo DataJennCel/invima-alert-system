@@ -7,6 +7,7 @@ MVP(Minimum Viable Product) de un sistema que automatiza la revision de alertas 
 Parte de la actividad de auditoria y habilitación en salud para todo consultorio particular, IPS y fabricantes deben revisar y registrar de forma periódica las alertas sanitarias emitidas por el INVIMA. Para el auditor o profesional puede ser dispendiosa esta labor. Este sistema permite liberar un poco la carga administrativa que representa.  
 
 🎯 Objetivo del repositorio
+
 Demostrar la construcción de una solución digital para automatizar el monitoreo y envío de alertas sanitarias del INVIMA a los actores implicados.
 
 📁 Contenido
@@ -26,3 +27,4 @@ Jenniffer Celis Médica con 10 años de experiencia clínica, con apuesta al hea
   
 📚 Referencias
 * 
+
