@@ -12,6 +12,13 @@ Demostrar la construcción de una solución digital para automatizar el monitore
 
 📁 Contenido
 
+- main.py — Script principal. Lee las alertas nuevas del INVIMA, las envía por email a cada consultorio y las marca como enviadas en Google Sheets.
+- enviar_notificacion.py — Gestiona el envío de emails con las alertas sanitarias usando SendGrid.
+- enviar_pdf_respuestas.py — Lee las respuestas del Google Form, genera un PDF de evidencia por consultorio y lo envía por email.
+generar_pdf_respuestas.py — Genera el PDF de evidencia de revisión a partir de las respuestas del formulario.
+- leer_sheets.py — Maneja la conexión con Google Sheets y lee tanto las alertas como las respuestas del Form y los consultorios registrados.
+- links_personalizados_forms.py — Genera links personalizados del Google Form con el nombre del consultorio pre-cargado automáticamente.
+- requirements.txt — Librerías de Python necesarias para ejecutar el sistema.
 
 💻 Tecnologías
 * Python 3.x
@@ -26,5 +33,7 @@ Jenniffer Celis Médica con 10 años de experiencia clínica, con apuesta al hea
 * 💼 LinkedIn: linkedin.com/in/jenniffer-celis
   
 📚 Referencias
-* 
+
+- Alertas Sanitarias INVIMA - Medicamentos y Productos Biológicos
+
 
